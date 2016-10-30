@@ -1,12 +1,11 @@
 
-export function initControls(three, camera) {
+export function initControls(three) {
   const state = {
     moveForward: false,
     moveBackwars: false,
     moveLeft: false,
     moveRight: false,
     canJump: false,
-    clock: new three.Clock(),
     velocity: new three.Vector3(),
   };
   state.velocity.x = 0;
@@ -66,8 +65,8 @@ function onKeyUp(e, state) {
 }
 
 
-export function updateControls(viewcontrols, controls) {
-  const delta = controls.clock.getDelta();
+export function updateControls(clock, viewcontrols, controls) {
+  const delta = clock.getDelta();
   const walkingSpeed = 200.0;
 
   controls.velocity.x -= controls.velocity.x * 10.0 * delta;

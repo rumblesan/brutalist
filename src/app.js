@@ -24,9 +24,11 @@ export const init = (three, element, width, height) => {
   const viewcontrols = initPointerLock(three, document.body, camera);
 
   scene.add(viewcontrols.getObject());
+  const clock = new three.Clock();
 
   const app = {
-    scene, camera, renderer, keycontrols, viewcontrols
+    scene, camera, renderer, keycontrols, viewcontrols,
+    clock
   };
 
   return app;
@@ -37,7 +39,7 @@ export const run = (app) => {
   const render = () => {
     requestAnimationFrame(render);
     app.renderer.render(app.scene, app.camera);
-    updateControls(app.viewcontrols, app.keycontrols);
+    updateControls(app.clock, app.viewcontrols, app.keycontrols);
   };
 
   render();
