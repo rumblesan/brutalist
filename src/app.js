@@ -2,17 +2,17 @@
 import {initControls, updateControls} from './controls';
 import {initPointerLock} from './pointerlock';
 
-export const init = (three, element) => {
+export const init = (three, element, width, height) => {
 
   const scene = new three.Scene();
   const camera = new three.PerspectiveCamera(
     75,
-    window.innerWidth / window.innerHeight,
+    width / height,
     1,
     10000
   );
   const renderer = new three.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(width, height);
 
   camera.position.y = 200;
   camera.position.z = 100;
