@@ -1,16 +1,12 @@
 
-export function initControls(three) {
+export function initControls() {
   const state = {
     moveForward: false,
     moveBackwars: false,
     moveLeft: false,
     moveRight: false,
-    canJump: false,
-    velocity: new three.Vector3(),
+    canJump: false
   };
-  state.velocity.x = 0;
-  state.velocity.y = 0;
-  state.velocity.z = 0;
   document.addEventListener('keydown', (e) => onKeyDown(e, state), false);
   document.addEventListener('keyup', (e) => onKeyUp(e, state), false);
   return state;
@@ -65,20 +61,19 @@ function onKeyUp(e, state) {
 }
 
 
-export function updateControls(clock, viewcontrols, controls) {
+export function updateControls(clock, avatar, viewcontrols, controls) {
   const delta = clock.getDelta();
-  const walkingSpeed = 200.0;
 
-  controls.velocity.x -= controls.velocity.x * 10.0 * delta;
-  controls.velocity.z -= controls.velocity.z * 10.0 * delta;
+  avatar.velocity.x -= avatar.velocity.x * 10.0 * delta;
+  avatar.velocity.z -= avatar.velocity.z * 10.0 * delta;
 
-  if (controls.moveForward) controls.velocity.z -= walkingSpeed * delta;
-  if (controls.moveBackward) controls.velocity.z += walkingSpeed * delta;
-  if (controls.moveLeft) controls.velocity.x -= walkingSpeed * delta;
-  if (controls.moveRight) controls.velocity.x += walkingSpeed * delta;
+  if (controls.moveForward) avatar.velocity.z -= avatar.walkingSpeed * delta;
+  if (controls.moveBackward) avatar.velocity.z += avatar.walkingSpeed * delta;
+  if (controls.moveLeft) avatar.velocity.x -= avatar.walkingSpeed * delta;
+  if (controls.moveRight) avatar.velocity.x += avatar.walkingSpeed * delta;
 
-  viewcontrols.getObject().translateX(controls.velocity.x * delta);
-  viewcontrols.getObject().translateY(controls.velocity.y * delta);
-  viewcontrols.getObject().translateZ(controls.velocity.z * delta);
+  viewcontrols.getObject().translateX(avatar.velocity.x * delta);
+  viewcontrols.getObject().translateY(avatar.velocity.y * delta);
+  viewcontrols.getObject().translateZ(avatar.velocity.z * delta);
 
 }
