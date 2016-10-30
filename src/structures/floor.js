@@ -1,5 +1,5 @@
 
-import checks from './images/checks.png';
+import checks from '../images/checks.png';
 
 export function createFloor(three) {
   const geometry = new three.PlaneGeometry(2000, 2000, 5, 5);

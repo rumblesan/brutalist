@@ -5,13 +5,13 @@ function checkForPointerLock() {
          'webkitPointerLockElement' in document;
 }
 
-export function initPointerLock(three, element, app) {
+export function initPointerLock(three, element, camera) {
 
   let viewcontrols = null;
   
   if (checkForPointerLock()) {
 
-    viewcontrols = new three.PointerLockControls(app.camera);
+    viewcontrols = new three.PointerLockControls(camera);
 
     var pointerlockchange = function () {
       if (document.pointerLockElement === element ||
