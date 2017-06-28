@@ -25,7 +25,7 @@ export const init = (three, element, width, height) => {
 
   const clock = new three.Clock();
 
-  const avatar = Avatar.init(three, 180, 200);
+  const avatar = Avatar.init(three, 40, 180, 400);
 
   camera.position.y = avatar.height;
 
@@ -39,12 +39,17 @@ export const init = (three, element, width, height) => {
   return app;
 };
 
-export const run = (app) => {
+export const run = (three, app) => {
+
+  const raycaster = new three.Raycaster();
 
   const render = () => {
     requestAnimationFrame(render);
     app.renderer.render(app.scene, app.camera);
     updateControls(app.clock, app.avatar, app.viewcontrols, app.keycontrols);
+    raycaster.set(app.camera.position, new three.Vector3(0, -1, 0));
+    const intersects = raycaster.intersectObjects(app.scene.children);
+    console.log(intersects.map((o) => o.distance));
   };
 
   render();

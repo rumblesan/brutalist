@@ -1,14 +1,15 @@
 
 import checks from '../images/checks.png';
 
-export function createFloor(three) {
+export function createBox(three) {
 
-  const geometry = new three.PlaneGeometry(2000, 2000, 5, 5);
-  geometry.applyMatrix(new three.Matrix4().makeRotationX(- Math.PI/2));
+  const geometry = new three.BoxGeometry(400, 40, 400, 50, 50, 50);
+  geometry.translate(-400, 20, -400);
 
   var texture = three.ImageUtils.loadTexture(checks);
   texture.wrapS = texture.wrapT = three.RepeatWrapping;
-  texture.repeat.set(64, 64);
+  texture.repeat.set(640, 640);
+
   const material = new three.MeshBasicMaterial({ color: 0xffffff, map: texture });
   return new three.Mesh(geometry, material);
 }
